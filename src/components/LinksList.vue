@@ -1,7 +1,6 @@
 <template>
   <div id="app">
-    <input ref="priv" placeholder="Insert private key..." @input="fetchLinks()"/> <br>
-    <input ref="pub" placeholder="Insert public key..." @input="fetchLinks()"/> 
+    <Logout/>
     <h2> Links shared by you </h2>
     <table class="ml">
       <tr v-for="(l, i) in links" :key=i> 
@@ -11,18 +10,26 @@
       </tr>
     </table>
     <div class="button button-md" id="add" @click="relocate('new')"> Add new </div>
+    <Footer/>
   </div>
 </template>
 
 <script>
+import Logout from "./Logout.vue";
 export default {
   name: "LinksList",
+
+  components: { Logout },
 
   data: () => {
     return {
       username: "salamantos",
       links: []
     };
+  },
+
+  created() {
+    this.fetchLinks();
   },
 
   methods: {
@@ -32,13 +39,18 @@ export default {
 
     fetchLinks() {
       var vm = this;
-      var links = JSON.parse(localStorage.getItem("links"));
+      var links = localStorage.getItem("links");
+      if (!links) {
+        return;
+      }
+      links = JSON.parse(links);
+
       fetch("http://localhost:5000/download", {
         method: "POST",
         body: JSON.stringify({
           hashes: links,
-          privKey: vm.$refs.priv.value,
-          pubKey: vm.$refs.pub.value
+          privKey: localStorage.getItem("login"),
+          pubKey: localStorage.getItem("password")
         }),
         headers: {
           "Content-Type": "application/json"
@@ -69,6 +81,7 @@ export default {
   padding-top: 60px;
   max-width: 1000px;
   margin: auto;
+  background-color: white;
 }
 
 h2 {

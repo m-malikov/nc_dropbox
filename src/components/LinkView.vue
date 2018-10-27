@@ -1,7 +1,6 @@
 <template>
   <div id="app">
-    <input ref="priv" placeholder="Insert private key..." @input="fetchFiles()"/> <br>
-    <input ref="pub" placeholder="Insert public key..." @input="fetchFiles()"/> 
+    <Logout/>
     <h2> {{ name }}  </h2>
     <h4 id="subtext"> created at {{ datetime}}</h4>
     <FilesList :addButton="false" ref="filesList"/>
@@ -11,11 +10,13 @@
 
 <script>
 import FilesList from "./FilesList.vue";
+import Logout from "./Logout.vue";
 
 export default {
   name: "LinkView",
   components: {
-    FilesList: FilesList
+    FilesList,
+    Logout
   },
 
   data: () => {
@@ -26,6 +27,10 @@ export default {
     };
   },
 
+  created() {
+    this.fetchFiles();
+  },
+
   methods: {
     fetchFiles() {
       var vm = this;
@@ -34,8 +39,8 @@ export default {
         method: "POST",
         body: JSON.stringify({
           hashes: [link],
-          privKey: vm.$refs.priv.value,
-          pubKey: vm.$refs.pub.value
+          privKey: localStorage.getItem("password"),
+          pubKey: localStorage.getItem("login")
         }),
         headers: {
           "Content-Type": "application/json"
@@ -54,7 +59,7 @@ export default {
     },
 
     base64ToArrayBuffer(base64) {
-      var binaryString = window.atob(base64);
+      var binaryString = atob(base64.split("base64,")[1]);
       var binaryLen = binaryString.length;
       var bytes = new Uint8Array(binaryLen);
       for (var i = 0; i < binaryLen; i++) {
@@ -80,8 +85,8 @@ export default {
           method: "POST",
           body: JSON.stringify({
             hashes: [f.hash],
-            privKey: vm.$refs.priv.value,
-            pubKey: vm.$refs.pub.value
+            privKey: localStorage.getItem("pasword"),
+            pubKey: localStorage.getItem("login")
           }),
           headers: {
             "Content-Type": "application/json"
@@ -91,8 +96,8 @@ export default {
             return result.json();
           })
           .then(data => {
-            var arrrayBuffer = base64ToArrayBuffer(data[f.hash]);
-            saveByteArray(f.name, arrayBuffer);
+            var arrayBuffer = this.base64ToArrayBuffer(data[f.hash]);
+            this.saveByteArray(f.name, arrayBuffer);
           });
       }
     }

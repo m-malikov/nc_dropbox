@@ -1,18 +1,14 @@
 <template>
   <div id="app">
+    <Logout/>
     <div v-if="!dataSent">
-      <input class="input-lg" ref="name" placeholder="Insert name..."/>
+      <input class="input-lg" v-model="name" placeholder="Insert folder name..."/>
       <h2> Files: </h2>
       <FilesList ref="files" :addButton="true"/>  
       <div>
-        <h2> Your keys: </h2>
-        <div class="ml">
-          <input ref="alicePriv" placehoder="Insert private key..."/> <br>
-          <input ref="alicePub" placeholder="Insert public key..."/> 
-        </div>
         <h2> Share folder with: </h2>
         <div class="ml">
-          <input ref="bobPub" placeholder="Insert public key..."/> 
+          <input v-model="bobLogin" placeholder="Insert login..."/> 
         </div>
       </div>
       <div class="button button-lg" @click="sendFiles()"> Create </div>
@@ -26,20 +22,23 @@
 
 <script>
 import FilesList from "./FilesList.vue";
-
+import Logout from "./Logout";
 export default {
   name: "LinkView",
   props: {},
 
   components: {
-    FilesList: FilesList
+    FilesList,
+    Logout
   },
 
   data: () => {
     return {
       files: [],
       dataSent: false,
-      link: ""
+      link: "",
+      name: "",
+      bobLogin: ""
     };
   },
 
@@ -47,12 +46,7 @@ export default {
     sendFiles() {
       var vm = this;
       vm.$refs.files
-        .sendFiles(
-          vm.$refs.name.value,
-          vm.$refs.alicePriv.value,
-          vm.$refs.alicePub.value,
-          vm.$refs.bobPub.value
-        )
+        .sendFiles(vm.name, vm.login, vm.password, vm.bobLogin)
         .then(response => {
           return response.text();
         })
@@ -60,14 +54,17 @@ export default {
           vm.link = "http://localhost:8081/link?id=" + hash;
           vm.dataSent = true;
 
-          var links = JSON.parse(localStorage.getItem("links"));
-          if (!links) {
+          var links = localStorage.getItem("links");
+          if (links) {
+            links = JSON.parse(links);
+          } else {
             links = [];
           }
           links.push(hash);
           localStorage.setItem("links", JSON.stringify(links));
         });
     },
+
     locateToLink() {
       window.location.href = this.link;
     }
@@ -75,4 +72,8 @@ export default {
 };
 </script>
 
-
+<style scoped>
+#app {
+  margin-top: 110px;
+}
+</style>
