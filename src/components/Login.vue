@@ -4,8 +4,9 @@
     <input v-model="login" placeholder="Login"/> <br>
     <input v-model="password" type="password" placeholder="Password"/> <br>
     <div class="button button-md" @click="tryLogin"> Login </div>
+    <img src="https://i.gifer.com/3o6O.gif" title="animation" />
+    <img style="position:absolute; float:right;" src="../assets/cloud.jpg" title="animation" />
     <svg ref="svg">
-  
     </svg>
   </div>
 </template>

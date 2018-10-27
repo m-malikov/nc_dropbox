@@ -1,4 +1,6 @@
-# nc_dropbox
+# CryptoDropBox is a completely new view on the cloud file systems.
+
+![](presentation/DropBox.pdf)
 
 ## Project setup
 ```
