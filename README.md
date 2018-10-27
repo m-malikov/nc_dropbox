@@ -1,6 +1,17 @@
 # CryptoDropBox is a completely new view on the cloud file systems.
 
-![](presentation/DropBox.pdf)
+![](presentation/DropBoxCryptobazar/DropBoxCryptobazar.001.jpeg)
+![](presentation/DropBoxCryptobazar/DropBoxCryptobazar.002.jpeg)
+![](presentation/DropBoxCryptobazar/DropBoxCryptobazar.003.jpeg)
+![](presentation/DropBoxCryptobazar/DropBoxCryptobazar.004.jpeg)
+![](presentation/DropBoxCryptobazar/DropBoxCryptobazar.005.jpeg)
+![](presentation/DropBoxCryptobazar/DropBoxCryptobazar.006.jpeg)
+![](presentation/DropBoxCryptobazar/DropBoxCryptobazar.007.jpeg)
+![](presentation/DropBoxCryptobazar/DropBoxCryptobazar.008.jpeg)
+![](presentation/DropBoxCryptobazar/DropBoxCryptobazar.009.jpeg)
+![](presentation/DropBoxCryptobazar/DropBoxCryptobazar.010.jpeg)
+![](presentation/DropBoxCryptobazar/DropBoxCryptobazar.011.jpeg)
+![](presentation/DropBoxCryptobazar/DropBoxCryptobazar.012.jpeg)
 
 ## Project setup
 ```
