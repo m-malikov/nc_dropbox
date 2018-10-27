@@ -92,11 +92,13 @@ def find_user(public, private=None):
 
     return cool_Alice
 
-@app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
-def index(path):
-    return app.send_static_file('index.html')
+def static_file(path):
+    return app.send_static_file(path)
 
+@app.errorhandler(404)
+def index(e):
+    return app.send_static_file('index.html')
 
 @app.route('/upload', methods=['POST'])
 @flask_cors.cross_origin()
