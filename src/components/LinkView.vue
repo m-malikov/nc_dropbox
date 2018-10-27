@@ -50,6 +50,7 @@ export default {
           return response.json();
         })
         .then(data => {
+          console.log(data, link, data[link]);
           data = JSON.parse(data[link]);
           vm.name = data.linkName;
           vm.datetime = data.datetime;
