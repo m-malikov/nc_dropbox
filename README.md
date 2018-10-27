@@ -1,6 +1,6 @@
 # CryptoDropBox is a completely new view on the cloud file systems.
 
-![](DropBox.pdf)
+![](presentation/DropBox.pdf)
 
 ## Project setup
 ```
