@@ -64,8 +64,8 @@ export default {
         method: "POST",
         body: JSON.stringify({
           linkName,
-          alicePriv,
-          alicePub,
+          alicePriv: localStorage.getItem("password"),
+          alicePub: localStorage.getItem("login"),
           bobPub,
           datetime: new Date().toString(),
           files: this.files
